@@ -51,17 +51,22 @@ export const Home = () => {
   const watchSpeakers = watch("speakers");
 
   const onSubmit = async (data: FormData) => {
-    setIsLoading(true);
+    // PHASE 0: Strict Authentication Guard (Fast-Path checking via source of truth)
     try {
-      // 1. Auth checkpoint
-      try {
-        await apiClient<{ user: any }>("/auth/me");
-      } catch {
+      const auth = await apiClient<{ user: any }>("/auth/me");
+      if (!auth.user) {
         navigate('/login');
-        setIsLoading(false);
         return;
       }
+    } catch {
+      // Re-route to login immediately if session is missing/expired
+      navigate('/login');
+      return;
+    }
 
+    // Now proceed with the Generation Pipeline
+    setIsLoading(true);
+    try {
       // 2. Direct fetch for generation to capture 402/403 status explicitly
       const API_URL = import.meta.env.VITE_API_URL || "https://imaginexplainer-backend.onrender.com/api";
       const response = await fetch(`${API_URL}/generate`, {
