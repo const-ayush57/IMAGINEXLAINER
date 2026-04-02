@@ -9,10 +9,11 @@ import { checkoutRouter } from './routes/checkout';
 import { webhookRouter } from './routes/webhooks';
 
 const app = express();
-const PORT = process.env.API_PORT || 3000;
+const PORT = process.env.PORT || 3000;
+const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
 
 app.use(helmet());
-app.use(cors({ origin: 'http://localhost:5173', credentials: true })); 
+app.use(cors({ origin: CORS_ORIGIN, credentials: true }));
 app.use(cookieParser()); // Critical extraction logic mapping JWT HTTP-only cookies securely tracking context arrays
 
 // ============================================
@@ -41,6 +42,6 @@ app.get('/health', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`[API] Enterprise Network structurally configured. Webhooks actively parsing explicitly on port ${PORT}`);
+app.listen(Number(PORT), '0.0.0.0', () => {
+  console.log(`[API] Server listening on 0.0.0.0:${PORT}`);
 });
