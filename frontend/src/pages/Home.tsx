@@ -27,10 +27,11 @@ export const Home = () => {
   const [upgradeToast, setUpgradeToast] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState<"basic" | "pro" | null>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   
   const tracker = useJobTracker(activeJobId);
 
-  const { register, handleSubmit, watch, setValue, formState: { isSubmitting } } = useForm<FormData>({
+  const { register, handleSubmit, watch, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       theme: "Dark Mode Matrix",
@@ -50,6 +51,7 @@ export const Home = () => {
   const watchSpeakers = watch("speakers");
 
   const onSubmit = async (data: FormData) => {
+    setIsGenerating(true);
     try {
       try {
          await apiClient<{ user: any }>("/auth/me");
@@ -62,7 +64,6 @@ export const Home = () => {
       setActiveJobId(String(response.jobId));
     } catch (err: any) {
       if (err.status === 402 || err.status === 403) {
-        // Stop spinner immediately and show upgrade modal
         setShowUpgradeModal(true);
         setUpgradeToast(true);
         setTimeout(() => setUpgradeToast(false), 4000);
@@ -71,6 +72,8 @@ export const Home = () => {
       } else {
         alert(`Generation failed: ${err.message}`);
       }
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -224,12 +227,12 @@ export const Home = () => {
                       </div>
 
                       <button 
-                          disabled={isSubmitting}
+                          disabled={isGenerating}
                           type="submit" 
                           className="bg-[#4d8eff] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#3b78eb] transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(77,142,255,0.2)] disabled:opacity-50 tracking-wide"
                       >
-                          {isSubmitting ? <Loader2 className="animate-spin w-4 h-4" /> : <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>}
-                          {isSubmitting ? "Firing Pipelines" : "Create"}
+                          {isGenerating ? <Loader2 className="animate-spin w-4 h-4" /> : <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>}
+                          {isGenerating ? "Firing Pipelines" : "Create"}
                       </button>
                   </div>
               </div>
