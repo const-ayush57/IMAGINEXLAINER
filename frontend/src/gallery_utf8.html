@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Discover Explainers | Imagine Explainers</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#dae2fd",
+              "tertiary-fixed-dim": "#ffb786",
+              "tertiary-container": "#df7412",
+              "surface-container-lowest": "#060e20",
+              "surface-container-low": "#131b2e",
+              "on-background": "#dae2fd",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#304671",
+              "surface-variant": "#2d3449",
+              "surface-dim": "#0b1326",
+              "on-tertiary": "#502400",
+              "inverse-on-surface": "#283044",
+              "surface-container-highest": "#2d3449",
+              "on-surface": "#dae2fd",
+              "on-primary-container": "#00285d",
+              "background": "#0b1326",
+              "on-surface-variant": "#c2c6d6",
+              "surface-container-high": "#222a3d",
+              "outline-variant": "#424754",
+              "tertiary": "#ffb786",
+              "secondary-fixed-dim": "#b1c6f9",
+              "primary": "#adc6ff",
+              "on-secondary-fixed": "#001a42",
+              "primary-fixed-dim": "#adc6ff",
+              "on-secondary": "#182f59",
+              "inverse-primary": "#005ac2",
+              "on-tertiary-fixed-variant": "#723600",
+              "secondary": "#b1c6f9",
+              "on-error": "#690005",
+              "surface-container": "#171f33",
+              "on-primary-fixed": "#001a42",
+              "secondary-fixed": "#d8e2ff",
+              "on-tertiary-container": "#461f00",
+              "tertiary-fixed": "#ffdcc6",
+              "on-secondary-container": "#9fb5e7",
+              "on-primary-fixed-variant": "#004395",
+              "primary-container": "#4d8eff",
+              "surface-bright": "#31394d",
+              "surface": "#0b1326",
+              "secondary-container": "#304671",
+              "on-tertiary-fixed": "#311400",
+              "on-error-container": "#ffdad6",
+              "on-primary": "#002e6a",
+              "error-container": "#93000a",
+              "primary-fixed": "#d8e2ff",
+              "outline": "#8c909f",
+              "surface-tint": "#adc6ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .glass-header {
+            background: rgba(11, 19, 38, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-header flex justify-between items-center px-14 h-20 w-full shadow-2xl shadow-black/40 font-['Manrope'] tracking-tight no-border">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-bold tracking-tighter text-[#dae2fd]">Imagine Explainers</span>
+<div class="hidden md:flex gap-8">
+<a class="text-[#4d8eff] font-semibold transition-colors duration-300" href="#">Discover</a>
+<a class="text-[#dae2fd]/70 hover:text-[#4d8eff] transition-colors duration-300" href="#">Library</a>
+<a class="text-[#dae2fd]/70 hover:text-[#4d8eff] transition-colors duration-300" href="#">Voices</a>
+<a class="text-[#dae2fd]/70 hover:text-[#4d8eff] transition-colors duration-300" href="#">Pricing</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-gradient-to-br from-primary-container to-primary text-on-primary-container px-5 py-2.5 rounded-md font-semibold active:scale-95 transition-transform">
+                Create Podcast
+            </button>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high ring-2 ring-outline-variant/15">
+<img alt="User profile" data-alt="professional headshot of a person with friendly expression, soft studio lighting, clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8K53odrIiZfH86pgmXDyintAjX6T0FQT0f2ircl7Ja9bJ8DymEJhox9z7BOKIlmSIUNDLZuZG066HlrMnoNJwf-8M2V0nHcDXGX7fIEXmPNB5UyJucVgxILadp3xopGBa55Sw7iSnwdKTHO5yjUpL_9CzkSGZTI0vDxN8i2GY11RX4hhvplscFA6Gd6mL9EoSCOF_gsJG56fIEEldBAL2unL4g_1ErKrzzqbmTpnySo5QOI9FelKFXIRVVrHJY2zxeBeSQBbbSNZZ"/>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-14 max-w-screen-2xl mx-auto min-h-screen">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="font-headline text-6xl font-extrabold tracking-[-0.02em] text-on-surface mb-4">Discover Explainers</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">Explore our curated library of high-impact visual and audio explainers designed for the modern learner.</p>
+</header>
+<!-- Filtering and Search Row -->
+<section class="flex flex-col md:flex-row gap-4 mb-16 items-center">
+<div class="relative w-full md:flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none border-b border-outline-variant/15 focus:ring-0 focus:border-primary text-on-surface pl-12 h-12 transition-all" placeholder="Search explainers..." type="text"/>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<div class="relative min-w-[140px] w-full">
+<select class="w-full appearance-none bg-surface-container-low border-none border-b border-outline-variant/15 text-on-surface px-4 h-12 focus:ring-0 focus:border-primary transition-all cursor-pointer">
+<option>All</option>
+<option>Science</option>
+<option>Philosophy</option>
+<option>Technology</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+<div class="relative min-w-[140px] w-full">
+<select class="w-full appearance-none bg-surface-container-low border-none border-b border-outline-variant/15 text-on-surface px-4 h-12 focus:ring-0 focus:border-primary transition-all cursor-pointer">
+<option>Views</option>
+<option>Newest</option>
+<option>Popular</option>
+<option>Longest</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Video Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
+<!-- Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="vibrant conceptual image of deep space nebula with swirling blue and purple energy patterns and distant stars" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-DNy95-BG_2TuPmlJrYAvtDIyqz6nB2chRvV60A46Tqsh_fy-OEiyBA3MrKWfA_w_WSvoDl3pihnEbV2pxGowoiJlObX-N9GnE2zS-_NpnlaW_2MAMNuKznO_iJs88_neAsXZw_lIwmPsTicmVYxNtY2e-UTLWZYYaeGvLVevgZIdaEyeI3oktwlh2ViPipLZvMqoXv6kkU-_eVR_8do74AX7WBCeH4CDBrVVqY5NZJruHWhIHyylo4qTfHc3wc9lojsTMzoNcBlY"/>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white uppercase">Video</div>
+<div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-medium text-white">12:45</div>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-tight group-hover:text-primary transition-colors">Quantum Physics: The Fabric of Reality</h3>
+<p class="text-on-surface-variant text-sm mb-1">Dr. Aris Thorne</p>
+<p class="text-outline text-xs uppercase tracking-widest font-semibold">10 months ago ΓÇó 544 views</p>
+</div>
+<!-- Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="clean modern laboratory setting with abstract blue lighting and scientific equipment in soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_q4GIC7N-Yu1pU1tXYNYTrBvospTaQC8fy16i8Y721rbOBedjo6MYsZjnp4JQJps3ZE_jDuujRqupMfJag_pxRcanCFExRqviTSd8BcD6Ls9RT5aRBbQajGq_rpR4bKBuiWTZrJ_evRHHkGCZb7ZPqUiEeiOQM60UhI2VYaPzq7VNeRoTT4RCMVU8J75aW3KGem18PzHi-uN0Mfb7Sus8dzv15VivlilhvuDtyE8yClQuwh8PydFCPkeUQ_G-JrJcwuK6qFXlGjvg"/>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white uppercase">Audio</div>
+<div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-medium text-white">08:20</div>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-tight group-hover:text-primary transition-colors">The Future of CRISPR Gene Editing</h3>
+<p class="text-on-surface-variant text-sm mb-1">BioLab Collective</p>
+<p class="text-outline text-xs uppercase tracking-widest font-semibold">2 weeks ago ΓÇó 1.2k views</p>
+</div>
+<!-- Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="cybernetic circuit board pattern with glowing cyan lines and digital data streams on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW_K_zmhCXqDYvxKL8ktXi37rJB9kO6JV18ixDqB7Bkt0x_W2FYJfzrf45bghR91iSYTio_RYKNU07WIHIcd-Z2ZJB_Lq-cEjVdFYUIh45XneWv0lDwZ_ruu76_SyWXmQp9Bxet4rAp7TJJdCXXNgomCOjywodO9avBWAVP2UjgbTVOYmoNhP4vLOL7kg3uZ-2VyWHIM28iZkOQbmaSEjGOdjTup1jO66rILvswtLYZKiMIY9H4OuarXETncuU6KoJ1MANdhkcRDbi"/>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white uppercase">Video</div>
+<div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-medium text-white">15:10</div>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-tight group-hover:text-primary transition-colors">AI Neural Networks Explained</h3>
+<p class="text-on-surface-variant text-sm mb-1">Tech Insight</p>
+<p class="text-outline text-xs uppercase tracking-widest font-semibold">5 days ago ΓÇó 3.8k views</p>
+</div>
+<!-- Card 4 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="majestic mountain peak at sunset with soft orange and pink clouds reflected in a crystal clear lake" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArfe6E5VdX6cVjGGRte6GrSg8nXWN39eU_e2UR2f3x_p40NXf_vR_K-ABlRcFDF5FIRs5KPiCuArSXOpwbi0wSMDdbSFLqwnww8xZKI4E0ejV5Q6-Rcl_4t-eXYMXlTXm_uy9I4K35hL2qWzeVgVZxNj_zrytViYcD9maglVrtVI2h9MsIZxONGykn8WwitvZpjsSgx7M7eXCP_hmWq2zHfpRASlLkxXMKJePbGy83lO4LX7GATB9xYnq3oIx3Ow7c4fU0hwgWnMH2"/>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white uppercase">Video</div>
+<div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-medium text-white">22:30</div>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-tight group-hover:text-primary transition-colors">Climate Dynamics &amp; Global Cycles</h3>
+<p class="text-on-surface-variant text-sm mb-1">Earth Studio</p>
+<p class="text-outline text-xs uppercase tracking-widest font-semibold">1 month ago ΓÇó 920 views</p>
+</div>
+<!-- Card 5 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="abstract architectural geometry with clean white curves and dramatic shadows against a deep blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-AMur0X28rhRAJhEDQDOKuG_KsFLISAaokIadNHOJfG2LVkWW8j2zr8Tl6YrBB0ykuy1ZtPR-NitCzaVsK7nhoruXCJ2qg3efdr5XYnV7ajzr05PH5TyK30eGl0OvwVswed7PZZO5Qv6T0cl58e82ebJA66ZB9zmXIss9bvUSTvIAlxdia1YjBeI91Q8FL0iFTYjApWdMqpKV0w0kB_yGwJvQ2_4sbcghfIKSB-1ycAYko2jtl_fukcAE-gf5iTJXuvA_a8jIlslW"/>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white uppercase">Audio</div>
+<div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-medium text-white">05:45</div>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-tight group-hover:text-primary transition-colors">Philosophy of Minimalist Design</h3>
+<p class="text-on-surface-variant text-sm mb-1">Marcus Vane</p>
+<p class="text-outline text-xs uppercase tracking-widest font-semibold">3 months ago ΓÇó 2.1k views</p>
+</div>
+<!-- Card 6 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="dark digital matrix background with falling green code characters and soft glowing effects" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1KpgrgBrbBnU7bK-x6o1caWXm8ZOgFc2P9YThGXpBPuv9KAQCXH1SUjbuTU7qyQxH2Ae4omk5kQbmXMCxpaZpAhOUlZ-ytIvzm-Bs8UucZELnoYKpsZt0rnk-kjhxqdEwZu3iY1xkuSpZQHj3thOWoKvSceTlqxKDf9Q51ACrQT30KdDoLWN_uC2tZscjRmdaJG8YGSbCR4oHWPx8hoAuNxTa-imVCes5KT9ukg2nxeFgq4c2csbz5zGZoHYB6IeffRYTO_GWyjt"/>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white uppercase">Video</div>
+<div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-medium text-white">11:00</div>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-tight group-hover:text-primary transition-colors">Understanding Blockchain Cryptography</h3>
+<p class="text-on-surface-variant text-sm mb-1">The Block Academy</p>
+<p class="text-outline text-xs uppercase tracking-widest font-semibold">6 months ago ΓÇó 1.5k views</p>
+</div>
+<!-- Card 7 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="macro photography of a honeybee on a bright yellow flower with soft bokeh background of a sunny garden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvB0h_AmTMMAzy0k11FAitOMbBcBoJmmjhxY4Wo64V9aCu15IpN0ZkK83o2AQVQ03XlwazjBMSb-HYgMmYNallFfBPOpENU0CF9AvNtwYAR7PObB8iwazT93k1c0-1UpdD1EqQDNcs-mVJnfXShPc9YWSKUUKHLMRb7usxGAifAair36Enb_g1stq7Vv4XYyjIcoF_g6UGVsMO_NVP8-U4-j3zAyCK_o2LEUrHF4Vg7I9_HRz2-3acVgeDcw796V_2jFyI6s-4Wyl0"/>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white uppercase">Video</div>
+<div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-medium text-white">14:12</div>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-tight group-hover:text-primary transition-colors">The Ecosystem: Roles of Pollinators</h3>
+<p class="text-on-surface-variant text-sm mb-1">Nature Daily</p>
+<p class="text-outline text-xs uppercase tracking-widest font-semibold">1 year ago ΓÇó 5.2k views</p>
+</div>
+<!-- Card 8 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up of a human eye with a digital HUD interface overlay showing various data points and scanning patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOC9eB5ULA2LGVzYT4PvK27iqcBzKuZLwkQhpy7U5GJc-RprLbwkiS2u1uG8ci-_UYt9UgWju7EpJEQoccJ7IbtEasRwumzvyGGQPTLKODyhjejCzRL98ysSm-GcSJtKLomK6N2IEvf_rDhes3OGYu3YyeNWlgyi0ethBH6T9aeauBjofjdb-oYeX5HN-J_atafcROg_yEBGNIqGVuTQG79_eiWgM-zyat7ARVxEt4IKeK-6BXwHGWDahXeYxtmEQwGbhnXsVuIabY"/>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white uppercase">Audio</div>
+<div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-medium text-white">09:30</div>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-tight group-hover:text-primary transition-colors">Cognitive Bias and Decision Making</h3>
+<p class="text-on-surface-variant text-sm mb-1">Mind Flow</p>
+<p class="text-outline text-xs uppercase tracking-widest font-semibold">4 months ago ΓÇó 3.3k views</p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-[#424754]/15 bg-[#0b1326] tonal-shift">
+<div class="flex flex-col md:flex-row justify-between items-center px-14 max-w-7xl mx-auto space-y-6 md:space-y-0">
+<div class="text-[#dae2fd]/40 font-['Inter'] text-xs leading-relaxed">
+                ┬⌐ 2024 Imagine Explainers. Built for the future of audio.
+            </div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] font-['Inter'] text-xs transition-opacity transition-colors" href="#">Privacy</a>
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] font-['Inter'] text-xs transition-opacity transition-colors" href="#">Terms</a>
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] font-['Inter'] text-xs transition-opacity transition-colors" href="#">API Docs</a>
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] font-['Inter'] text-xs transition-opacity transition-colors" href="#">Twitter</a>
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] font-['Inter'] text-xs transition-opacity transition-colors" href="#">Discord</a>
+</div>
+</div>
+</footer>
+</body></html>

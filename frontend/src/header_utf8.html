@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Imagine Explainers - AI Video Platform</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#222a3d",
+              "surface-bright": "#31394d",
+              "primary-container": "#4d8eff",
+              "on-primary-fixed": "#001a42",
+              "on-tertiary-fixed-variant": "#723600",
+              "on-tertiary-fixed": "#311400",
+              "background": "#0b1326",
+              "surface-container-highest": "#2d3449",
+              "secondary-container": "#304671",
+              "tertiary-fixed-dim": "#ffb786",
+              "surface-container-lowest": "#060e20",
+              "on-primary": "#002e6a",
+              "tertiary-fixed": "#ffdcc6",
+              "primary-fixed": "#d8e2ff",
+              "tertiary-container": "#df7412",
+              "on-tertiary": "#502400",
+              "on-tertiary-container": "#461f00",
+              "secondary-fixed": "#d8e2ff",
+              "on-secondary-fixed-variant": "#304671",
+              "on-primary-container": "#00285d",
+              "secondary-fixed-dim": "#b1c6f9",
+              "on-error": "#690005",
+              "on-secondary": "#182f59",
+              "outline": "#8c909f",
+              "surface-dim": "#0b1326",
+              "surface-variant": "#2d3449",
+              "on-primary-fixed-variant": "#004395",
+              "inverse-primary": "#005ac2",
+              "surface": "#0b1326",
+              "tertiary": "#ffb786",
+              "primary": "#adc6ff",
+              "on-surface-variant": "#c2c6d6",
+              "inverse-surface": "#dae2fd",
+              "surface-tint": "#adc6ff",
+              "error": "#ffb4ab",
+              "error-container": "#93000a",
+              "surface-container-low": "#131b2e",
+              "on-secondary-fixed": "#001a42",
+              "on-secondary-container": "#9fb5e7",
+              "surface-container": "#171f33",
+              "on-error-container": "#ffdad6",
+              "inverse-on-surface": "#283044",
+              "on-background": "#dae2fd",
+              "secondary": "#b1c6f9",
+              "outline-variant": "#424754",
+              "on-surface": "#dae2fd",
+              "primary-fixed-dim": "#adc6ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-header {
+            background: rgba(19, 27, 46, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 w-full z-50 glass-header shadow-[0px_24px_48px_rgba(0,0,0,0.4)]">
+<nav class="flex justify-between items-center px-14 py-4 w-full">
+<!-- Left Section -->
+<div class="flex items-center gap-10">
+<div class="text-lg font-bold text-[#dae2fd] flex items-center gap-2 font-headline tracking-tight">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+                    Imagine Explainers
+                </div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-lg group transition-all duration-300 hover:bg-surface-container-high cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="search">search</span>
+<span class="text-blue-400 font-bold border-b-2 border-blue-500 font-manrope tracking-tight font-medium py-1">Discover</span>
+</div>
+</div>
+</div>
+<!-- Right Section -->
+<div class="flex items-center gap-6">
+<!-- Language Selector -->
+<button class="flex items-center gap-2 text-[#dae2fd]/70 hover:text-[#dae2fd] font-manrope font-medium transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined text-lg" data-icon="language">language</span>
+<span class="text-xs font-bold tracking-widest">US EN</span>
+</button>
+<!-- Dark Mode Toggle -->
+<button class="p-2 rounded-full text-[#dae2fd]/70 hover:text-[#dae2fd] hover:bg-[#222a3d] transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<!-- Login Button -->
+<button class="text-[#dae2fd]/70 hover:text-[#dae2fd] font-manrope font-medium transition-all duration-300 active:scale-95 px-4">
+                    Log In
+                </button>
+<!-- Sign Up Button -->
+<button class="px-5 py-2 border border-outline-variant/30 rounded-lg text-[#dae2fd] font-manrope font-medium hover:bg-surface-container-high transition-all duration-300 active:scale-95">
+                    Sign Up
+                </button>
+<!-- Create Primary Action -->
+<button class="flex items-center gap-2 bg-gradient-to-br from-primary-container to-primary text-on-primary px-6 py-2.5 rounded-lg font-manrope font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                    Create
+                </button>
+</div>
+</nav>
+</header>
+<!-- Hero Content Canvas -->
+<main class="relative pt-32 min-h-screen overflow-hidden">
+<!-- Background Architectural Elements -->
+<div class="absolute inset-0 z-0">
+<div class="absolute top-0 right-0 w-2/3 h-2/3 bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4"></div>
+<div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-secondary/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-14 py-20">
+<div class="flex flex-col md:flex-row gap-16 items-start">
+<!-- Text Content: Architectural Lead -->
+<div class="w-full md:w-3/5">
+<span class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high text-primary text-[0.6875rem] font-bold tracking-[0.2em] mb-8 uppercase">
+                        Enterprise Video Generation
+                    </span>
+<h1 class="font-headline text-[3.5rem] leading-[1.1] font-extrabold tracking-tight text-on-surface mb-8">
+                        The Future of <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Visual Knowledge</span>
+</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed max-w-xl mb-12">
+                        Architecting high-fidelity explainers through generative AI. Transform complex data into cinematic narratives with the precision of a master builder.
+                    </p>
+<div class="flex items-center gap-6">
+<button class="bg-gradient-to-br from-primary-container to-primary text-on-primary px-10 py-4 rounded-xl font-headline font-bold text-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 active:scale-95">
+                            Start Building
+                        </button>
+<button class="flex items-center gap-3 text-on-surface font-headline font-bold group px-4 py-4">
+                            View Showcase
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Featured Decorative Element: Recessed Depth -->
+<div class="w-full md:w-2/5 mt-12 md:mt-0">
+<div class="relative aspect-square rounded-3xl overflow-hidden bg-surface-container-low shadow-2xl border border-outline-variant/10 group">
+<img alt="AI Visualization" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-1000" data-alt="abstract 3D architectural render of flowing crystalline structures in deep blue and iridescent violet with cinematic volumetric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlU9ZeMd237OQ4XcDv21fR5a0_xFlH97nbBvm_FNKLtpFxRfOEak0NEImr1Y9v1OP1z-vuHCrfvagDpz1w3QHzVhvwZRksXPgJFq9vhDUL9SWCoXUQyv7ayhSYhQxbR4FeMTjoDLfMrZNEU1LHKAE3_-6KCVlM-gmQ9vO1_rZKVXwm-uRPaiLYVMimWSTYqyz7-LhZWwutL1R4iH6uGFptiRcn7HT3J9F7tkwEgf7tGLfFb5x4NiC-KCxXIFDkJ9fi0lbLPVzvydME"/>
+<!-- Overlay Glass Card -->
+<div class="absolute bottom-6 left-6 right-6 glass-header p-6 rounded-2xl border border-white/5">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="play_circle" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div>
+<h4 class="text-sm font-bold font-headline">Latest Generation</h4>
+<p class="text-[0.6875rem] text-on-surface-variant font-medium tracking-wide">4K NEURAL RENDER ΓÇó 0:42 SEC</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Bar / Tonal Sectioning -->
+<div class="mt-32 pt-16 border-t border-outline-variant/10">
+<p class="text-[0.6875rem] font-bold tracking-[0.3em] uppercase text-on-surface-variant/50 text-center mb-10">
+                    Trusted by industry architects at
+                </p>
+<div class="flex justify-between items-center opacity-30 grayscale hover:grayscale-0 transition-all duration-500 gap-8 flex-wrap lg:flex-nowrap">
+<div class="flex items-center gap-2 font-headline font-extrabold text-2xl">
+<span class="material-symbols-outlined" data-icon="change_history">change_history</span> VELOX
+                    </div>
+<div class="flex items-center gap-2 font-headline font-extrabold text-2xl">
+<span class="material-symbols-outlined" data-icon="category">category</span> NEXUS
+                    </div>
+<div class="flex items-center gap-2 font-headline font-extrabold text-2xl">
+<span class="material-symbols-outlined" data-icon="diamond">diamond</span> AETHER
+                    </div>
+<div class="flex items-center gap-2 font-headline font-extrabold text-2xl">
+<span class="material-symbols-outlined" data-icon="deployed_code">deployed_code</span> SYNTH
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- Minimal Subtle Grid Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] z-[1]">
+<div class="w-full h-full" style="background-image: radial-gradient(#dae2fd 1px, transparent 1px); background-size: 40px 40px;"></div>
+</div>
+</body></html>

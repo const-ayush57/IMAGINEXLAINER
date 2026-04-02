@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-variant": "#2d3449",
+            "on-primary-container": "#00285d",
+            "on-error-container": "#ffdad6",
+            "on-tertiary-fixed": "#311400",
+            "on-secondary-container": "#9fb5e7",
+            "surface-bright": "#31394d",
+            "error": "#ffb4ab",
+            "background": "#0b1326",
+            "outline-variant": "#424754",
+            "secondary-container": "#304671",
+            "surface": "#0b1326",
+            "outline": "#8c909f",
+            "on-tertiary-container": "#461f00",
+            "on-secondary-fixed": "#001a42",
+            "tertiary-fixed": "#ffdcc6",
+            "surface-container-high": "#222a3d",
+            "tertiary": "#ffb786",
+            "error-container": "#93000a",
+            "primary-fixed-dim": "#adc6ff",
+            "primary-fixed": "#d8e2ff",
+            "secondary-fixed": "#d8e2ff",
+            "on-primary": "#002e6a",
+            "on-secondary": "#182f59",
+            "surface-dim": "#0b1326",
+            "primary": "#adc6ff",
+            "on-primary-fixed": "#001a42",
+            "on-surface": "#dae2fd",
+            "on-error": "#690005",
+            "surface-container-lowest": "#060e20",
+            "secondary": "#b1c6f9",
+            "on-background": "#dae2fd",
+            "surface-tint": "#adc6ff",
+            "surface-container-highest": "#2d3449",
+            "on-tertiary-fixed-variant": "#723600",
+            "tertiary-container": "#df7412",
+            "inverse-on-surface": "#283044",
+            "secondary-fixed-dim": "#b1c6f9",
+            "inverse-primary": "#005ac2",
+            "inverse-surface": "#dae2fd",
+            "on-secondary-fixed-variant": "#304671",
+            "surface-container-low": "#131b2e",
+            "surface-container": "#171f33",
+            "on-tertiary": "#502400",
+            "on-primary-fixed-variant": "#004395",
+            "tertiary-fixed-dim": "#ffb786",
+            "on-surface-variant": "#c2c6d6",
+            "primary-container": "#4d8eff"
+          },
+          fontFamily: {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-icon {
+      background: rgba(45, 52, 73, 0.4);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(66, 71, 84, 0.2);
+    }
+    .text-tight { letter-spacing: -0.02em; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-[#0b1326]/60 backdrop-blur-xl flex justify-between items-center px-14 h-20 w-full">
+<div class="text-2xl font-bold tracking-tighter text-[#dae2fd] font-headline">Imagine Explainers</div>
+<div class="hidden md:flex items-center space-x-10">
+<a class="text-[#4d8eff] font-semibold font-headline tracking-tight transition-colors duration-300" href="#">Discover</a>
+<a class="text-[#dae2fd]/70 font-headline tracking-tight hover:text-[#4d8eff] transition-colors duration-300" href="#">Library</a>
+<a class="text-[#dae2fd]/70 font-headline tracking-tight hover:text-[#4d8eff] transition-colors duration-300" href="#">Voices</a>
+<a class="text-[#dae2fd]/70 font-headline tracking-tight hover:text-[#4d8eff] transition-colors duration-300" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-gradient-to-br from-primary-container to-primary text-on-primary-container px-6 py-2.5 rounded-md font-semibold font-headline transition-transform active:scale-95">
+        Create Podcast
+      </button>
+<img alt="User profile" class="w-10 h-10 rounded-full border border-outline-variant/20" data-alt="Close-up portrait of a creative professional in soft studio lighting with a neutral modern aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCziP2mIU6aGq0NUMKajKwco52M-Z90h65yieXEU0j3ogKOwek0vnVFdnGbXu3tGpNwCdEuSSEkPb64qJaL93sp8b7x82bI6ce-A2NdGeTSVyYkZoj5cNMDmqO29_N3RedU8qcNjPluA0UOhxwDh9eQk3aJm1jKoEjoH_W7ObDjYXH_kfJUXoaRUUW7IMBU7RNNipb4MUkiMxuuFTsyy-VImrYotTok-54bj8S5Ni_ienOl9BApj-rRSz6aYt9X7ka1rnQQSbx5FFDz"/>
+</div>
+</nav>
+<main class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20">
+<!-- Architectural Background elements -->
+<div class="absolute inset-0 z-0 pointer-events-none">
+<div class="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-secondary-container/10 rounded-full blur-[140px]"></div>
+</div>
+<!-- Floating Glassmorphism Icons -->
+<div class="absolute inset-0 z-10 pointer-events-none container mx-auto">
+<div class="glass-icon absolute top-[22%] left-[12%] p-4 rounded-xl rotate-[-12deg]">
+<span class="material-symbols-outlined text-primary text-3xl">electric_bolt</span>
+</div>
+<div class="glass-icon absolute top-[18%] right-[15%] p-5 rounded-xl rotate-[15deg]">
+<span class="material-symbols-outlined text-tertiary text-4xl">public</span>
+</div>
+<div class="glass-icon absolute bottom-[35%] left-[8%] p-3 rounded-xl rotate-[8deg]">
+<span class="material-symbols-outlined text-secondary text-2xl">book</span>
+</div>
+<div class="glass-icon absolute bottom-[25%] right-[12%] p-4 rounded-xl rotate-[-10deg]">
+<span class="material-symbols-outlined text-primary text-3xl">wb_sunny</span>
+</div>
+<div class="glass-icon absolute top-[45%] right-[5%] p-3 rounded-xl rotate-[5deg]">
+<span class="material-symbols-outlined text-on-surface-variant text-2xl">atm</span>
+</div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-20 text-center px-6 max-w-5xl mx-auto flex flex-col items-center">
+<h1 class="font-headline font-extrabold text-6xl md:text-8xl text-on-surface text-tight mb-12 tracking-tighter">
+        Imagine an <br/>
+<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary-container to-secondary">Explainer Podcast</span>
+</h1>
+<!-- Search Input Container -->
+<div class="w-full max-w-2xl mb-12 relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl blur opacity-25 group-focus-within:opacity-50 transition duration-1000"></div>
+<div class="relative flex items-center bg-surface-container-low rounded-xl p-2 pl-6 shadow-2xl border-b border-outline-variant/15 transition-all">
+<span class="material-symbols-outlined text-outline-variant mr-4">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-on-surface placeholder:text-outline/50 font-body py-4" placeholder="What you want to learn about" type="text"/>
+<button class="bg-gradient-to-br from-primary-container to-primary text-on-primary-container px-10 py-4 rounded-lg font-bold font-headline transition-all active:scale-95 shadow-lg shadow-primary/20 ml-2">
+            Create
+          </button>
+</div>
+</div>
+<!-- Topic Selection -->
+<div class="flex flex-col items-center space-y-6">
+<p class="text-on-surface-variant font-medium tracking-wide text-sm font-label uppercase">Choose a Topic to Get Started</p>
+<div class="flex flex-wrap justify-center gap-3">
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-6 py-2.5 rounded-full text-sm font-semibold transition-all border border-outline-variant/10 active:scale-95">Biology</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-6 py-2.5 rounded-full text-sm font-semibold transition-all border border-outline-variant/10 active:scale-95">Chemistry</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-6 py-2.5 rounded-full text-sm font-semibold transition-all border border-outline-variant/10 active:scale-95">Physics</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-6 py-2.5 rounded-full text-sm font-semibold transition-all border border-outline-variant/10 active:scale-95">Psychology</button>
+</div>
+</div>
+<!-- Bottom Secondary Link -->
+<a class="mt-16 group flex items-center gap-2 text-primary font-semibold text-sm transition-opacity hover:opacity-80" href="#">
+<span class="material-symbols-outlined text-lg">description</span>
+<span class="border-b-2 border-primary/20 group-hover:border-primary/50 pb-0.5 transition-all">Create from document</span>
+</a>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-12 border-t border-[#424754]/15 bg-[#0b1326] mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-14 max-w-7xl mx-auto font-body text-xs leading-relaxed">
+<div class="text-[#dae2fd]/40 mb-4 md:mb-0">
+        ┬⌐ 2024 Imagine Explainers. Built for the future of audio.
+      </div>
+<div class="flex space-x-8">
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] transition-opacity" href="#">Privacy</a>
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] transition-opacity" href="#">Terms</a>
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] transition-opacity" href="#">API Docs</a>
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] transition-opacity" href="#">Twitter</a>
+<a class="text-[#dae2fd]/40 hover:text-[#4d8eff] transition-opacity" href="#">Discord</a>
+</div>
+</div>
+</footer>
+</body></html>
