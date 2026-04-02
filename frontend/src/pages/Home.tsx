@@ -27,7 +27,7 @@ export const Home = () => {
   const [upgradeToast, setUpgradeToast] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState<"basic" | "pro" | null>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
   const tracker = useJobTracker(activeJobId);
 
@@ -51,29 +51,51 @@ export const Home = () => {
   const watchSpeakers = watch("speakers");
 
   const onSubmit = async (data: FormData) => {
-    setIsGenerating(true);
+    setIsLoading(true);
     try {
+      // 1. Auth checkpoint
       try {
-         await apiClient<{ user: any }>("/auth/me");
+        await apiClient<{ user: any }>("/auth/me");
       } catch {
-         navigate('/login');
-         return;
+        navigate('/login');
+        setIsLoading(false);
+        return;
       }
 
-      const response = await apiClient<{ jobId: number }>("/generate", { data });
-      setActiveJobId(String(response.jobId));
-    } catch (err: any) {
-      if (err.status === 402 || err.status === 403) {
+      // 2. Direct fetch for generation to capture 402/403 status explicitly
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const response = await fetch(`${API_URL}/generate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      // PHASE 3: Explicit status interceptor
+      if (response.status === 402 || response.status === 403) {
+        setIsLoading(false);
         setShowUpgradeModal(true);
         setUpgradeToast(true);
         setTimeout(() => setUpgradeToast(false), 4000);
-      } else if (err.status === 401 || err.message?.includes('401')) {
+        return;
+      }
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+
+      const resData = await response.json();
+      setActiveJobId(String(resData.jobId));
+      
+    } catch (err: any) {
+      if (err.message?.includes('401')) {
         navigate('/login');
       } else {
-        alert(`Generation failed: ${err.message}`);
+        alert(`${err.message}`);
       }
     } finally {
-      setIsGenerating(false);
+      setIsLoading(false);
     }
   };
 
@@ -227,12 +249,12 @@ export const Home = () => {
                       </div>
 
                       <button 
-                          disabled={isGenerating}
+                          disabled={isLoading}
                           type="submit" 
                           className="bg-[#4d8eff] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#3b78eb] transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(77,142,255,0.2)] disabled:opacity-50 tracking-wide"
                       >
-                          {isGenerating ? <Loader2 className="animate-spin w-4 h-4" /> : <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>}
-                          {isGenerating ? "Firing Pipelines" : "Create"}
+                          {isLoading ? <Loader2 className="animate-spin w-4 h-4" /> : <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>}
+                          {isLoading ? "Firing Pipelines" : "Create"}
                       </button>
                   </div>
               </div>
