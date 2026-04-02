@@ -63,7 +63,7 @@ export const Home = () => {
       }
 
       // 2. Direct fetch for generation to capture 402/403 status explicitly
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const API_URL = import.meta.env.VITE_API_URL || "https://imaginexplainer-backend.onrender.com/api";
       const response = await fetch(`${API_URL}/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
