@@ -19,11 +19,7 @@ export const apiClient = async <T = any>(endpoint: string, config: RequestConfig
   const reqConfig: RequestInit = {
     method: data ? "POST" : "GET",
     headers,
-    
-    // CRITICAL SECURITY REQUIREMENT:
-    // Ensures HTTP-only JWT cookies are sent automatically back avoiding AXIOS global interceptions
-    credentials: "include", 
-    
+    credentials: "include",
     body: data ? JSON.stringify(data) : undefined,
     ...customConfig,
   };
@@ -32,10 +28,11 @@ export const apiClient = async <T = any>(endpoint: string, config: RequestConfig
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => ({}));
-    throw new Error(errorBody.error || `Request rejected natively with HTTP status ${response.status}`);
+    const err: any = new Error(errorBody.error || `Request failed with HTTP status ${response.status}`);
+    err.status = response.status; // Expose status for 402/403 interceptors in Home.tsx
+    throw err;
   }
 
-  // Handle No-Content responses ensuring JSON parsing doesn't crash identically to node fetch specifications
   if (response.status === 204) return {} as T;
   
   return await response.json() as T;

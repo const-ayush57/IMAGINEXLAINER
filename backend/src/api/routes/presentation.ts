@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { db } from "../../db";
-import { presentationJobsTable } from "../../db/schema";
+import { presentationJobsTable, usersTable } from "../../db/schema";
 import { eq } from "drizzle-orm";
 import { requireAuth } from "../../middleware/auth";
 import { presentationQueue } from "../../config/queue";
@@ -26,7 +26,18 @@ presentationRouter.post("/generate", requireAuth, async (req: any, res: any) => 
     const userId = req.user.id;
     const payload = generateSchema.parse(req.body);
 
-    // 1. Establish initial status marker natively directly routing Drizzle to Postgres
+    // PHASE 3: Strict Credit Gate — check before touching BullMQ
+    const [user] = await db.select().from(usersTable).where(eq(usersTable.id, userId));
+    if (!user || user.credits <= 0) {
+      return res.status(402).json({ error: "Insufficient credits. Please upgrade your plan to continue generating." });
+    }
+
+    // Atomically deduct 1 credit before queuing (prevents double-spending)
+    await db.update(usersTable)
+      .set({ credits: user.credits - 1 })
+      .where(eq(usersTable.id, userId));
+
+    // 1. Establish initial status marker in Postgres
     const [newJob] = await db.insert(presentationJobsTable).values({
       userId,
       topic: payload.topic,

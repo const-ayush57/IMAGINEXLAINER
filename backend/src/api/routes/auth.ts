@@ -59,7 +59,10 @@ authRouter.post("/register", authRateLimiter, async (req, res) => {
     );
 
     setAuthCookie(res, token);
-    res.status(201).json({ message: "Registration successful. Welcome to ImagineXplainer.", user: { email: newUser.email } });
+    res.status(201).json({ 
+      message: "Registration successful.", 
+      user: { email: newUser.email, isOnboarded: newUser.isOnboarded }
+    });
   } catch (err: any) {
     if (err instanceof z.ZodError) {
       return res.status(400).json({ error: err.errors[0].message });
@@ -91,8 +94,10 @@ authRouter.post("/login", authRateLimiter, async (req, res) => {
     );
 
     setAuthCookie(res, token);
-    
-    res.status(200).json({ message: "Login strictly verified.", user: { email: user.email } });
+    res.status(200).json({ 
+      message: "Login verified.", 
+      user: { email: user.email, isOnboarded: user.isOnboarded, credits: user.credits }
+    });
   } catch (err: any) {
     if (err instanceof z.ZodError) {
       return res.status(400).json({ error: err.errors[0].message });
@@ -110,8 +115,8 @@ import { requireAuth } from "../../middleware/auth";
 authRouter.get("/me", requireAuth, async (req: any, res: any) => {
   try {
      const [user] = await db.select().from(usersTable).where(eq(usersTable.id, req.user.id));
-     if (!user) return res.status(401).json({ error: "No user found tracking contexts." });
-     res.status(200).json({ user: { email: user.email } });
+     if (!user) return res.status(401).json({ error: "No user found." });
+     res.status(200).json({ user: { email: user.email, isOnboarded: user.isOnboarded, credits: user.credits, subscriptionTier: user.subscriptionTier } });
   } catch (err) {
      res.status(401).json({ error: "Invalid token validation mapped." });
   }

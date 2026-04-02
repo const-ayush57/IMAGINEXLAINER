@@ -24,8 +24,9 @@ export const Login = () => {
   const onSubmit = async (data: LoginData) => {
     setServerError(null);
     try {
-      await apiClient<{ message: string, user: any }>("/auth/login", { data });
-      navigate("/");
+      const res = await apiClient<{ message: string, user: { isOnboarded: boolean } }>("/auth/login", { data });
+      if (!res.user.isOnboarded) navigate("/onboarding");
+      else navigate("/");
     } catch (err: any) {
       setServerError(err.message || "An unexpected network collision occurred securely.");
     }

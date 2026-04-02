@@ -27,8 +27,9 @@ export const Register = () => {
   const onSubmit = async (data: RegisterData) => {
     setServerError(null);
     try {
-      await apiClient<{ message: string, user: any }>("/auth/register", { data });
-      navigate("/"); 
+      const res = await apiClient<{ message: string, user: { isOnboarded: boolean } }>("/auth/register", { data });
+      if (!res.user.isOnboarded) navigate("/onboarding");
+      else navigate("/");
     } catch (err: any) {
       setServerError(err.message || "An unexpected node connection failure tracking error executed.");
     }

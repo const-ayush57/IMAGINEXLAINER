@@ -15,9 +15,13 @@ const runSeed = async () => {
     await db.insert(usersTable).values({
       email,
       passwordHash,
+      credits: 50,        // Enough for E2E testing without hitting the paywall
+      isOnboarded: true,  // Skip the onboarding wizard for the test user
+      subscriptionTier: "pro",
     });
 
-    console.log(`Successfully seeded user: ${email}`);
+    console.log(`✓ Seeded test user: ${email}`);
+    console.log(`  credits: 50 | isOnboarded: true | tier: pro`);
     process.exit(0);
   } catch (err) {
     console.error("Fatal error during seeding sequence:", err);

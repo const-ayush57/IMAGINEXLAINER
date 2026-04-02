@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, Video, Mic, Clock, ChevronDown, Globe, Image as ImageIcon, AlertCircle } from "lucide-react";
+import { Loader2, Video, Mic, Clock, ChevronDown, Globe, Image as ImageIcon, AlertCircle, X, Zap, Check } from "lucide-react";
 import { apiClient } from "../api/client";
 import { useJobTracker } from "../hooks/useJobTracker";
 
@@ -23,8 +23,9 @@ type FormData = z.infer<typeof formSchema>;
 export const Home = () => {
   const navigate = useNavigate();
   const [activeJobId, setActiveJobId] = useState<string | null>(null);
-  const [showPaywall, setShowPaywall] = useState(false);
-  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [upgradeToast, setUpgradeToast] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState<"basic" | "pro" | null>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
   
   const tracker = useJobTracker(activeJobId);
@@ -49,14 +50,10 @@ export const Home = () => {
   const watchSpeakers = watch("speakers");
 
   const onSubmit = async (data: FormData) => {
-    if (data.length !== "Short (5 Slides)") {
-       setShowPaywall(true);
-       return;
-    }
     try {
       try {
          await apiClient<{ user: any }>("/auth/me");
-      } catch(authErr) {
+      } catch {
          navigate('/login');
          return;
       }
@@ -64,30 +61,35 @@ export const Home = () => {
       const response = await apiClient<{ jobId: number }>("/generate", { data });
       setActiveJobId(String(response.jobId));
     } catch (err: any) {
-      if (err.message.includes('token') || err.message.includes('401')) {
-         navigate('/login');
+      if (err.status === 402 || err.status === 403) {
+        // Stop spinner immediately and show upgrade modal
+        setShowUpgradeModal(true);
+        setUpgradeToast(true);
+        setTimeout(() => setUpgradeToast(false), 4000);
+      } else if (err.status === 401 || err.message?.includes('401')) {
+        navigate('/login');
       } else {
-         alert(`Native fetch ingestion sequence halted actively mapping: ${err.message}`);
+        alert(`Generation failed: ${err.message}`);
       }
     }
   };
 
-  const handleStripeCheckout = async () => {
+  const handleStripeCheckout = async (planId: "basic" | "pro") => {
     try {
-      setCheckoutLoading(true);
-      const res = await apiClient<{ checkoutUrl: string }>("/checkout/session", { data: {} });
+      setCheckoutLoading(planId);
+      const res = await apiClient<{ checkoutUrl: string }>("/checkout/session", { data: { planId } });
       window.location.href = res.checkoutUrl;
-    } catch (err) {
-      alert("Failed safely configuring Stripe Sessions Native hooks.");
+    } catch {
+      alert("Failed to start checkout. Please try again.");
     } finally {
-      setCheckoutLoading(false);
+      setCheckoutLoading(null);
     }
   };
 
   return (
     <div className="relative w-full flex-grow flex flex-col items-center pt-24 pb-12 font-body text-white">
       
-      {/* Absolute Background Floats strictly mimicking Screenshot */}
+      {/* Absolute Background Floats */}
       <div className="absolute inset-0 z-10 pointer-events-none hidden lg:block overflow-hidden max-w-[1400px] mx-auto">
         <div className="absolute top-[35%] left-[8%] p-3.5 rounded-2xl rotate-[-8deg] bg-surface-variant/10 border border-white/5 shadow-[0_0_20px_rgba(77,142,255,0.1)]">
            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4d8eff" strokeWidth="1.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
@@ -110,7 +112,7 @@ export const Home = () => {
       </div>
 
       <div className="relative z-20 text-center px-6 w-full max-w-[900px] mx-auto flex flex-col items-center">
-        {!activeJobId && !showPaywall && (
+        {!activeJobId && (
             <h1 className="font-headline font-extrabold text-5xl md:text-6xl text-white mb-10 tracking-tight leading-tight">
               Imagine an <span className="relative inline-block px-2">
                  <span className="relative z-10 text-white">Explainer</span>
@@ -119,7 +121,7 @@ export const Home = () => {
             </h1>
         )}
 
-        {!activeJobId && !showPaywall && (
+        {!activeJobId && (
           <form onSubmit={handleSubmit(onSubmit)} className="w-full relative group">
             <div className="relative flex flex-col bg-[#161616] rounded-3xl border border-white/10 transition-all text-left shadow-2xl">
               
@@ -251,20 +253,10 @@ export const Home = () => {
           </form>
         )}
 
-        {/* STRIPE PAYWALL STATE TRACKING UI */}
-        {showPaywall && (
-          <div className="w-full max-w-2xl bg-[#161616] border border-white/10 rounded-[24px] p-10 backdrop-blur-md shadow-2xl space-y-8 animate-in slide-in-from-bottom-8 duration-500 mt-4 text-center">
-             <h2 className="text-3xl font-extrabold text-white font-headline tracking-tight">Premium Vector Locked</h2>
-             <p className="text-white/60 max-w-md mx-auto leading-relaxed text-sm">Rendering MP4 videos longer than 2 minutes requires aggressive dedicated cloud compute power natively. Upgrade immediately solving limitations.</p>
-             <button onClick={handleStripeCheckout} disabled={checkoutLoading} className="w-full bg-[#4d8eff] text-white hover:brightness-110 font-bold py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(77,142,255,0.2)] flex items-center justify-center gap-2">
-                 {checkoutLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Unlock Global Render Compute - $5"}
-             </button>
-             <button onClick={() => setShowPaywall(false)} className="text-xs text-white/40 mt-4 uppercase tracking-widest hover:text-white font-bold transition-all">Go Back</button>
-          </div>
-        )}
+        {/* Replaced: old length-based paywall removed — backend 402 gate handles this now */}
 
         {/* SSE TRACKING RENDER */}
-        {activeJobId && !showPaywall && (
+        {activeJobId && (
           <div className="w-full max-w-2xl bg-[#161616] border border-white/10 rounded-[24px] p-12 backdrop-blur-md shadow-2xl text-center space-y-8 min-h-[350px] flex flex-col justify-center items-center mt-4">
               
               {(tracker.status === "pending" || tracker.status === "processing") && (
@@ -309,6 +301,78 @@ export const Home = () => {
         )}
 
       </div>
+
+      {/* ── Upgrade Modal Overlay ── */}
+      {showUpgradeModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={(e) => { if (e.target === e.currentTarget) setShowUpgradeModal(false); }}
+        >
+          <div className="w-full max-w-lg bg-[#111] border border-white/10 rounded-3xl p-8 shadow-2xl space-y-6 relative animate-in zoom-in-95 duration-200">
+            <button onClick={() => setShowUpgradeModal(false)} className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="text-center">
+              <h2 className="text-2xl font-extrabold text-white font-headline">Upgrade Plan</h2>
+              <p className="text-white/50 text-sm mt-1">You've run out of credits. Pick a plan to keep creating.</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              {/* Basic */}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col gap-4">
+                <div>
+                  <p className="text-white/50 text-xs font-bold tracking-widest uppercase">Basic</p>
+                  <p className="text-3xl font-extrabold text-white mt-1">$5<span className="text-sm text-white/40 font-medium">/mo</span></p>
+                  <p className="text-white/40 text-xs mt-0.5">10 credits</p>
+                </div>
+                <ul className="space-y-1.5 text-xs text-white/50 flex-1">
+                  <li className="flex items-center gap-1.5"><Check className="w-3 h-3 text-[#4d8eff]" /> 10 explainer videos</li>
+                  <li className="flex items-center gap-1.5"><Check className="w-3 h-3 text-[#4d8eff]" /> Video & Podcast</li>
+                </ul>
+                <button
+                  onClick={() => handleStripeCheckout("basic")}
+                  disabled={!!checkoutLoading}
+                  className="w-full py-2.5 bg-white/10 hover:bg-white/20 text-white text-sm font-bold rounded-xl transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {checkoutLoading === "basic" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Upgrade"}
+                </button>
+              </div>
+
+              {/* Pro */}
+              <div className="bg-[#4d8eff]/10 border border-[#4d8eff]/40 rounded-2xl p-5 flex flex-col gap-4 relative">
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#4d8eff] text-white text-[9px] font-bold px-3 py-0.5 rounded-full tracking-wider">POPULAR</div>
+                <div>
+                  <p className="text-[#4d8eff] text-xs font-bold tracking-widest uppercase">Pro</p>
+                  <p className="text-3xl font-extrabold text-white mt-1">$10<span className="text-sm text-white/40 font-medium">/mo</span></p>
+                  <p className="text-white/40 text-xs mt-0.5">30 credits</p>
+                </div>
+                <ul className="space-y-1.5 text-xs text-white/50 flex-1">
+                  <li className="flex items-center gap-1.5"><Check className="w-3 h-3 text-[#4d8eff]" /> 30 explainer videos</li>
+                  <li className="flex items-center gap-1.5"><Check className="w-3 h-3 text-[#4d8eff]" /> Priority processing</li>
+                  <li className="flex items-center gap-1.5"><Check className="w-3 h-3 text-[#4d8eff]" /> Real-time web search</li>
+                </ul>
+                <button
+                  onClick={() => handleStripeCheckout("pro")}
+                  disabled={!!checkoutLoading}
+                  className="w-full py-2.5 bg-[#4d8eff] hover:bg-[#3b78eb] text-white text-sm font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(77,142,255,0.25)] disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {checkoutLoading === "pro" ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Zap className="w-3.5 h-3.5" /> Upgrade</>}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Bottom-right Toast ── */}
+      {upgradeToast && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#1a1a1a] border border-white/10 rounded-2xl px-5 py-3.5 shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
+          <AlertCircle className="w-4 h-4 text-yellow-400 shrink-0" />
+          <p className="text-sm text-white font-medium">You need to upgrade to a paid plan to create videos.</p>
+        </div>
+      )}
+
     </div>
   );
 };
