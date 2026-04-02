@@ -9,7 +9,7 @@ export const webhookRouter = Router();
 
 // Initialize internal Stripe Network natively securing key access
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-06-20',
+  apiVersion: '2024-06-20' as any,
 });
 
 // CRITICAL SECURITY NODE:
@@ -38,7 +38,7 @@ webhookRouter.post('/stripe', async (req: any, res: any) => {
       try {
          // Drizzle Native Upgrades
          await db.update(usersTable)
-          .set({ subscriptionTier: 'premium', updatedAt: new Date() })
+          .set({ subscriptionTier: 'premium' })
           .where(eq(usersTable.id, parseInt(userId, 10)));
       } catch (dbError) {
          console.error(`[Stripe Transaction Error] Drizzle hook decoupled tracking:`, dbError);

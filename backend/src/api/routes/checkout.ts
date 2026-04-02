@@ -7,7 +7,7 @@ export const checkoutRouter = Router();
 
 // Configure strictly scoped Stripe configurations
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-06-20',
+  apiVersion: '2024-06-20' as any,
 });
 
 // Exposed natively authenticated checkout tunnel payload maps

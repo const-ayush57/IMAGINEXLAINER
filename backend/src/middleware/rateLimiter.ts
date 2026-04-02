@@ -6,7 +6,7 @@ import { redisClient } from "../config/redis";
 export const globalRateLimiter = rateLimit({
   store: new RedisStore({
     // Typecast required by library, but functional implementation
-    sendCommand: (...args: string[]) => redisClient.call(...args) as any,
+    sendCommand: (...args: string[]) => (redisClient.call as any)(...args),
   }),
   windowMs: 15 * 60 * 1000, // 15 minutes window
   max: 100, // Limit each IP to 100 requests per `window`
@@ -20,7 +20,7 @@ export const globalRateLimiter = rateLimit({
 // Stricter Rate Limiter exclusively for Auth endpoints (Brute-force protection)
 export const authRateLimiter = rateLimit({
   store: new RedisStore({
-    sendCommand: (...args: string[]) => redisClient.call(...args) as any,
+    sendCommand: (...args: string[]) => (redisClient.call as any)(...args),
   }),
   windowMs: 60 * 60 * 1000, // 1 hour window
   max: 4, // Max 10 login/register attempts per hour per IP
